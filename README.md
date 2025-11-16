@@ -6,7 +6,7 @@
   - **Последовательная (seq)**
   - **Параллельная (par), используя ParlayLib**
 - Массив из 100 миллионов (`10^8`) случайных целых чисел, тестирование сортировки, усреднение таймингов по 5 попыткам
-- Параллельная версия запускалась c `PARLAY_NUM_THREADS=8` (с 4 тредами результаты были слишком невнушительными)
+- Параллельная версия запускалась c `PARLAY_NUM_THREADS=4` (с 4 тредами)
 - Сравнение: ускорение par/seq, тесты на корректность (assert).
 
 ---
@@ -30,28 +30,28 @@ PARLAY_NUM_THREADS=8 ./parallel_algos
 
 ## Тайминги
 
-(base) mirali777@109893531i:~/parallel_algos/build$ PARLAY_NUM_THREADS=8 ./parallel_algos
+(base) mirali777@109893531i:~/parallel_algos/build$ PARLAY_NUM_THREADS=4 ./parallel_algos
 Data initialized
 
-Attempt 0:
-Parallel quicksort: 26579ms
-Sequentional sort: 30760ms
-
 Attempt 1:
-Parallel quicksort: 32673ms
-Sequentional sort: 34647ms
+Parallel quicksort: 8355ms
+Sequentional sort: 29914ms
 
 Attempt 2:
-Parallel quicksort: 31544ms
-Sequentional sort: 32323ms
+Parallel quicksort: 8064ms
+Sequentional sort: 29155ms
 
 Attempt 3:
-Parallel quicksort: 28979ms
-Sequentional sort: 36133ms
+Parallel quicksort: 7748ms
+Sequentional sort: 30014ms
 
 Attempt 4:
-Parallel quicksort: 29852ms
-Sequentional sort: 37414ms
+Parallel quicksort: 8188ms
+Sequentional sort: 30298ms
 
-Parallel quicksort average: 29925.4000ms
-Sequentional sort average: 34255.4000ms
+Attempt 5:
+Parallel quicksort: 8122ms
+Sequentional sort: 30198ms
+
+Parallel quicksort average: 8095.4000ms
+Sequentional sort average: 29915.8000ms
