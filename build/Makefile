@@ -153,6 +153,30 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/parallel_algos.dir/build.make CMakeFiles/parallel_algos.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/quicksort.o: src/quicksort.cpp.o
+.PHONY : src/quicksort.o
+
+# target to build an object file
+src/quicksort.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parallel_algos.dir/build.make CMakeFiles/parallel_algos.dir/src/quicksort.cpp.o
+.PHONY : src/quicksort.cpp.o
+
+src/quicksort.i: src/quicksort.cpp.i
+.PHONY : src/quicksort.i
+
+# target to preprocess a source file
+src/quicksort.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parallel_algos.dir/build.make CMakeFiles/parallel_algos.dir/src/quicksort.cpp.i
+.PHONY : src/quicksort.cpp.i
+
+src/quicksort.s: src/quicksort.cpp.s
+.PHONY : src/quicksort.s
+
+# target to generate assembly for a file
+src/quicksort.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parallel_algos.dir/build.make CMakeFiles/parallel_algos.dir/src/quicksort.cpp.s
+.PHONY : src/quicksort.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -165,6 +189,9 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/quicksort.o"
+	@echo "... src/quicksort.i"
+	@echo "... src/quicksort.s"
 .PHONY : help
 
 

@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/parallel_algos.dir/src/main.cpp.o"
   "CMakeFiles/parallel_algos.dir/src/main.cpp.o.d"
+  "CMakeFiles/parallel_algos.dir/src/quicksort.cpp.o"
+  "CMakeFiles/parallel_algos.dir/src/quicksort.cpp.o.d"
   "parallel_algos"
   "parallel_algos.pdb"
 )
