@@ -15,7 +15,7 @@
             }
             double par_ms_avg = 0;
             double seq_ms_avg = 0;
-            for (size_t i = 0; i < attempts_count; i++) {
+            for (size_t i = 1; i <= attempts_count; i++) {
                 std::cout << "Attempt " << i << ":" << std::endl;
                 auto arr = data;
                 // for (auto& it: arr) std::cout << it << " "; std::cout << std::endl;
