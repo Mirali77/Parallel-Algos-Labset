@@ -1,0 +1,11 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/parallel_algos.dir/src/main.cpp.o"
+  "CMakeFiles/parallel_algos.dir/src/main.cpp.o.d"
+  "parallel_algos"
+  "parallel_algos.pdb"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/parallel_algos.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

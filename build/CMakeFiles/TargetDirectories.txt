@@ -1,0 +1,3 @@
+/home/mirali777/parallel_algos/build/CMakeFiles/parallel_algos.dir
+/home/mirali777/parallel_algos/build/CMakeFiles/edit_cache.dir
+/home/mirali777/parallel_algos/build/CMakeFiles/rebuild_cache.dir
