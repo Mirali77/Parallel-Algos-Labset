@@ -22,3 +22,5 @@
 parlaylib/build/
 parlaylib/*.o
 parlaylib/*.so
+
+*_deps/
