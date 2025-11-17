@@ -16,7 +16,7 @@
 Требования:
 - ParlayLib (https://github.com/cmu-parlay/parlaylib)
 - CMake >= 3.10
-- C++17 компилятор
+- C++20
 
 ```sh
 # Сборка
@@ -30,28 +30,29 @@ PARLAY_NUM_THREADS=8 ./parallel_algos
 
 ## Тайминги
 
-(base) mirali777@109893531i:~/parallel_algos/build$ PARLAY_NUM_THREADS=4 ./parallel_algos
+(base) mirali777@109893531i:~/parallel_algos/build$ ./parallel_algos
+
 Data initialized
 
 Attempt 1:
-Parallel quicksort: 8355ms
-Sequentional sort: 29914ms
+Parallel quicksort: 4495ms
+Sequentional sort: 28892ms
 
 Attempt 2:
-Parallel quicksort: 8064ms
-Sequentional sort: 29155ms
+Parallel quicksort: 4214ms
+Sequentional sort: 27871ms
 
 Attempt 3:
-Parallel quicksort: 7748ms
-Sequentional sort: 30014ms
+Parallel quicksort: 4044ms
+Sequentional sort: 27623ms
 
 Attempt 4:
-Parallel quicksort: 8188ms
-Sequentional sort: 30298ms
+Parallel quicksort: 4153ms
+Sequentional sort: 28108ms
 
 Attempt 5:
-Parallel quicksort: 8122ms
-Sequentional sort: 30198ms
+Parallel quicksort: 4398ms
+Sequentional sort: 27626ms
 
-Parallel quicksort average: 8095.4000ms
-Sequentional sort average: 29915.8000ms
+Parallel quicksort average: 4260.8000ms
+Sequentional sort average: 28024.0000ms
