@@ -1,4 +1,4 @@
-# Parallel и Sequential QuickSort бенчмарки
+# Реализация параллельного и последовательного QuickSort-ов
 
 ## Что сделано
 
@@ -31,31 +31,32 @@ PARLAY_NUM_THREADS=8 ./parallel_algos
 ./parallel_algos_tests
 ```
 
-## Тайминги
+## Бенчмарки
 
+```bash
 (base) mirali777@109893531i:~/parallel_algos/build$ PARLAY_NUM_THREADS=4 ./parallel_algos
-
 Data initialized
 
 Attempt 1:
-Parallel quicksort: 8132ms
-Sequentional sort: 27892ms
+Parallel quicksort: 7373ms
+Sequential sort: 26610ms
 
 Attempt 2:
-Parallel quicksort: 7443ms
-Sequentional sort: 27869ms
+Parallel quicksort: 7452ms
+Sequential sort: 26980ms
 
 Attempt 3:
-Parallel quicksort: 7347ms
-Sequentional sort: 27765ms
+Parallel quicksort: 7342ms
+Sequential sort: 27324ms
 
 Attempt 4:
-Parallel quicksort: 7462ms
-Sequentional sort: 27874ms
+Parallel quicksort: 7484ms
+Sequential sort: 27884ms
 
 Attempt 5:
-Parallel quicksort: 7402ms
-Sequentional sort: 28464ms
+Parallel quicksort: 8102ms
+Sequential sort: 28543ms
 
-Parallel quicksort average: 7557.2000ms
-Sequentional sort average: 27972.8000ms
+Parallel quicksort average: 7550.6000ms
+Sequential sort average: 27468.2000ms
+```

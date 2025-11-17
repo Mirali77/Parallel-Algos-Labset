@@ -30,7 +30,7 @@ namespace NAlgoLab::NQuickSort {
             t1 = std::chrono::high_resolution_clock::now();
             // for (auto& it: arr) std::cout << it << " "; std::cout << std::endl;
             auto seq_ms = std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count();
-            std::cout << "Sequentional sort: " << seq_ms << "ms" << std::endl << std::endl;
+            std::cout << "Sequential sort: " << seq_ms << "ms" << std::endl << std::endl;
 
             par_ms_avg += par_ms;
             seq_ms_avg += seq_ms;
@@ -40,6 +40,6 @@ namespace NAlgoLab::NQuickSort {
         seq_ms_avg /= attempts_count;
 
         std::cout << "Parallel quicksort average: " << std::setprecision(4) << std::fixed << par_ms_avg << "ms" << std::endl;
-        std::cout << "Sequentional sort average: " << std::setprecision(4) << std::fixed << seq_ms_avg << "ms" << std::endl;
+        std::cout << "Sequential sort average: " << std::setprecision(4) << std::fixed << seq_ms_avg << "ms" << std::endl;
     }
 }
