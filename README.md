@@ -58,5 +58,4 @@ Parallel quicksort: 7402ms
 Sequentional sort: 28464ms
 
 Parallel quicksort average: 7557.2000ms
-
 Sequentional sort average: 27972.8000ms
