@@ -30,29 +30,30 @@ PARLAY_NUM_THREADS=8 ./parallel_algos
 
 ## Тайминги
 
-(base) mirali777@109893531i:~/parallel_algos/build$ ./parallel_algos
+(base) mirali777@109893531i:~/parallel_algos/build$ PARLAY_NUM_THREADS=4 ./parallel_algos
 
 Data initialized
 
 Attempt 1:
-Parallel quicksort: 4495ms
-Sequentional sort: 28892ms
+Parallel quicksort: 8132ms
+Sequentional sort: 27892ms
 
 Attempt 2:
-Parallel quicksort: 4214ms
-Sequentional sort: 27871ms
+Parallel quicksort: 7443ms
+Sequentional sort: 27869ms
 
 Attempt 3:
-Parallel quicksort: 4044ms
-Sequentional sort: 27623ms
+Parallel quicksort: 7347ms
+Sequentional sort: 27765ms
 
 Attempt 4:
-Parallel quicksort: 4153ms
-Sequentional sort: 28108ms
+Parallel quicksort: 7462ms
+Sequentional sort: 27874ms
 
 Attempt 5:
-Parallel quicksort: 4398ms
-Sequentional sort: 27626ms
+Parallel quicksort: 7402ms
+Sequentional sort: 28464ms
 
-Parallel quicksort average: 4260.8000ms
-Sequentional sort average: 28024.0000ms
+Parallel quicksort average: 7557.2000ms
+
+Sequentional sort average: 27972.8000ms
