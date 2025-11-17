@@ -24,8 +24,11 @@ mkdir build && cd build
 cmake ..
 make
 
-# Запуск (пример для 8 потоков)
+# Запуск программы (пример для 8 потоков)
 PARLAY_NUM_THREADS=8 ./parallel_algos
+
+# Запуск тестов (они находятся в tests)
+./parallel_algos_tests
 ```
 
 ## Тайминги

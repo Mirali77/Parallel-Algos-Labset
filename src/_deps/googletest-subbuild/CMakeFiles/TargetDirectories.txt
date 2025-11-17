@@ -1,0 +1,3 @@
+/home/mirali777/parallel_algos/src/_deps/googletest-subbuild/CMakeFiles/googletest-populate.dir
+/home/mirali777/parallel_algos/src/_deps/googletest-subbuild/CMakeFiles/edit_cache.dir
+/home/mirali777/parallel_algos/src/_deps/googletest-subbuild/CMakeFiles/rebuild_cache.dir

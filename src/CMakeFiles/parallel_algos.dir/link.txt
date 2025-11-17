@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/parallel_algos.dir/main.cpp.o CMakeFiles/parallel_algos.dir/quicksort.cpp.o CMakeFiles/parallel_algos.dir/utils.cpp.o -o parallel_algos 
