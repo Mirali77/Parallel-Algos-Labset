@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/parallel_algos_tests.dir/tests/quicksort_ut.cpp.o -o parallel_algos_tests  libquicksort_lib.a lib/libgtest.a lib/libgtest_main.a lib/libgtest.a 
