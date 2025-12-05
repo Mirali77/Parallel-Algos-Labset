@@ -38,25 +38,25 @@ PARLAY_NUM_THREADS=8 ./parallel_algos
 Data initialized
 
 Attempt 1:
-Parallel quicksort: 7373ms
-Sequential sort: 26610ms
+Parallel quicksort: 14623ms
+Sequential sort: 42390ms
 
 Attempt 2:
-Parallel quicksort: 7452ms
-Sequential sort: 26980ms
+Parallel quicksort: 14530ms
+Sequential sort: 40353ms
 
 Attempt 3:
-Parallel quicksort: 7342ms
-Sequential sort: 27324ms
+Parallel quicksort: 13858ms
+Sequential sort: 40052ms
 
 Attempt 4:
-Parallel quicksort: 7484ms
-Sequential sort: 27884ms
+Parallel quicksort: 13773ms
+Sequential sort: 40468ms
 
 Attempt 5:
-Parallel quicksort: 8102ms
-Sequential sort: 28543ms
+Parallel quicksort: 13769ms
+Sequential sort: 40666ms
 
-Parallel quicksort average: 7550.6000ms
-Sequential sort average: 27468.2000ms
+Parallel quicksort average: 14110.6000ms
+Sequential sort average: 40785.8000ms
 ```
