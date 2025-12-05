@@ -124,10 +124,10 @@ namespace NAlgoLab::NQuickSort {
         size_t n = in.size();
         if (n <= batch_threshold) {
             if (to_in) {
-                std::sort(in.begin(), in.end());
+                seq_quicksort(in);
             } else {
                 parlay::parallel_for(0, n, [&](size_t i){ buf[i] = in[i]; });
-                std::sort(buf.begin(), buf.begin() + n);
+                seq_quicksort(buf);
             }
             return;
         }
