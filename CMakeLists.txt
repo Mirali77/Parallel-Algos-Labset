@@ -6,7 +6,24 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 find_package(Parlay REQUIRED)
 
+include(FetchContent)
+
+FetchContent_Declare(
+  parlay
+  GIT_REPOSITORY https://github.com/cmuparlay/parlaylib.git
+)
+FetchContent_MakeAvailable(parlay)
+
+FetchContent_Declare(
+  googletest
+  GIT_REPOSITORY https://github.com/google/googletest.git
+  GIT_TAG        v1.17.0
+)
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
+
 add_executable(parallel_algos
+    src/bfs.cpp
     src/main.cpp
     src/quicksort.cpp
     src/utils.cpp
@@ -20,16 +37,11 @@ add_library(quicksort_lib
 )
 target_link_libraries(quicksort_lib PUBLIC Parlay::parlay)
 
-include(FetchContent)
-
-FetchContent_Declare(
-  googletest
-  GIT_REPOSITORY https://github.com/google/googletest.git
-  GIT_TAG        v1.17.0
+add_library(bfs_lib
+    src/bfs.cpp
+    src/utils.cpp
 )
-
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-FetchContent_MakeAvailable(googletest)
+target_link_libraries(bfs_lib PUBLIC Parlay::parlay)
 
 add_executable(
     parallel_algos_tests
