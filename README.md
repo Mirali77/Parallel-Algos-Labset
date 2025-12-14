@@ -26,8 +26,8 @@ make
 # Запуск программы (пример для 8 потоков)
 PARLAY_NUM_THREADS=8 ./parallel_algos --mode quicksort
 
-# Запуск тестов (они находятся в tests)
-./parallel_algos_tests
+# Запуск тестов
+./quicksort_tests
 ```
 
 ### Дополнительные аргументы запуска (QuickSort)
@@ -77,31 +77,31 @@ Sequential sort average: 30639.6000ms
 ## Запуск тестов (QuickSort)
 
 ```bash
-(base) mirali777@109893531i:~/parallel_algos/build$ ./parallel_algos_tests 
+(base) mirali777@109893531i:~/parallel_algos/build$ ./quicksort_tests
 Running main() from /home/mirali777/parallel_algos/build/_deps/googletest-src/googletest/src/gtest_main.cc
 [==========] Running 8 tests from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 8 tests from QuickSortTest
 [ RUN      ] QuickSortTest.ParallelQuickSortNoBatchingRandomDataTest
-[       OK ] QuickSortTest.ParallelQuickSortNoBatchingRandomDataTest (396 ms)
+[       OK ] QuickSortTest.ParallelQuickSortNoBatchingRandomDataTest (452 ms)
 [ RUN      ] QuickSortTest.ParallelQuickSortWithBatchingRandomDataTest
-[       OK ] QuickSortTest.ParallelQuickSortWithBatchingRandomDataTest (136 ms)
+[       OK ] QuickSortTest.ParallelQuickSortWithBatchingRandomDataTest (152 ms)
 [ RUN      ] QuickSortTest.SequentialQuickSortRandomDataTest
 [       OK ] QuickSortTest.SequentialQuickSortRandomDataTest (301 ms)
 [ RUN      ] QuickSortTest.ParallelQuickSortLowVarietyRandomDataTest
-[       OK ] QuickSortTest.ParallelQuickSortLowVarietyRandomDataTest (142 ms)
+[       OK ] QuickSortTest.ParallelQuickSortLowVarietyRandomDataTest (153 ms)
 [ RUN      ] QuickSortTest.ParallelQuickSortAllEqualDataTest
-[       OK ] QuickSortTest.ParallelQuickSortAllEqualDataTest (89 ms)
+[       OK ] QuickSortTest.ParallelQuickSortAllEqualDataTest (95 ms)
 [ RUN      ] QuickSortTest.ParallelQuickSortSortedDataTest
-[       OK ] QuickSortTest.ParallelQuickSortSortedDataTest (785 ms)
+[       OK ] QuickSortTest.ParallelQuickSortSortedDataTest (872 ms)
 [ RUN      ] QuickSortTest.ParallelQuickSortReversedSortedDataTest
-[       OK ] QuickSortTest.ParallelQuickSortReversedSortedDataTest (776 ms)
+[       OK ] QuickSortTest.ParallelQuickSortReversedSortedDataTest (793 ms)
 [ RUN      ] QuickSortTest.ParallelQuickSortConstantValuesTest
 [       OK ] QuickSortTest.ParallelQuickSortConstantValuesTest (0 ms)
-[----------] 8 tests from QuickSortTest (2629 ms total)
+[----------] 8 tests from QuickSortTest (2822 ms total)
 
 [----------] Global test environment tear-down
-[==========] 8 tests from 1 test suite ran. (2629 ms total)
+[==========] 8 tests from 1 test suite ran. (2822 ms total)
 [  PASSED  ] 8 tests.
 ```
 
@@ -122,8 +122,8 @@ Running main() from /home/mirali777/parallel_algos/build/_deps/googletest-src/go
 # Запуск программы (пример для 8 потоков)
 PARLAY_NUM_THREADS=8 ./parallel_algos --mode bfs
 
-# Запуск тестов (они находятся в tests)
-./parallel_algos_tests
+# Запуск тестов
+./bfs_tests
 ```
 
 ### Дополнительные аргументы запуска (BFS)
@@ -175,3 +175,18 @@ Sequential bfs average: 6793.2000ms
 ```
 
 ## Запуск тестов (BFS)
+
+```bash
+(base) mirali777@109893531i:~/parallel_algos/build$ ./bfs_tests
+Running main() from /home/mirali777/parallel_algos/build/_deps/googletest-src/googletest/src/gtest_main.cc
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from BfsTest
+[ RUN      ] BfsTest.CubeGraphResultCorrectness
+[       OK ] BfsTest.CubeGraphResultCorrectness (549 ms)
+[----------] 1 test from BfsTest (549 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (550 ms total)
+[  PASSED  ] 1 test.
+```

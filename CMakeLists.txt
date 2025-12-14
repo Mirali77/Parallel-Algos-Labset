@@ -44,10 +44,17 @@ add_library(bfs_lib
 target_link_libraries(bfs_lib PUBLIC Parlay::parlay)
 
 add_executable(
-    parallel_algos_tests
+    quicksort_tests
     tests/quicksort_ut.cpp
 )
-target_link_libraries(parallel_algos_tests PRIVATE quicksort_lib gtest gtest_main)
+target_link_libraries(quicksort_tests PRIVATE quicksort_lib gtest gtest_main)
+
+add_executable(
+    bfs_tests
+    tests/bfs_ut.cpp
+)
+target_link_libraries(bfs_tests PRIVATE bfs_lib gtest gtest_main)
 
 enable_testing()
-add_test(NAME parallel_algos_tests COMMAND parallel_algos_tests)
+add_test(NAME quicksort_tests COMMAND quicksort_tests)
+add_test(NAME bfs_tests COMMAND bfs_tests)
