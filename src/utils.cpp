@@ -13,6 +13,16 @@ namespace NAlgoLab::NUtils {
         return data;
     }
 
+    TGraph::TGraph(int n) {
+        AdjList.resize(n);
+    }
+    
+    void TGraph::add_edge(int from, int to) {
+        assert(from >= 0 && from < AdjList.size());
+        assert(to >= 0 && to < AdjList.size());
+        AdjList[from].push_back(to);
+    }
+
     std::tuple<int, int, int> get_coord(int v, int n) {
         int x = v / (n * n);
         int y = (int)(v / n) % n;
@@ -21,9 +31,8 @@ namespace NAlgoLab::NUtils {
     }
 
     TGraph generate_cube_graph(int n) {
-        TGraph graph;
         auto N = n * n * n;
-        graph.AdjList.resize(N);
+        TGraph graph(N);
         parlay::parallel_for(0, N, [&](int idx) {
             auto [x, y, z] = get_coord(idx, n);
             int cnt = 0;
@@ -35,7 +44,7 @@ namespace NAlgoLab::NUtils {
                     || z + dz < 0 || z + dz >= n
                 ) continue;
                 auto next = (x + dx) * n * n + (y + dy) * n + (z + dz);
-                graph.AdjList[idx].push_back(next);
+                graph.add_edge(idx, next);
             }
         });
         return graph;

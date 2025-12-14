@@ -12,6 +12,10 @@ namespace NAlgoLab::NUtils {
     );
 
     struct TGraph {
+        TGraph(int n = 0);
+
+        void add_edge(int from, int to);
+
         std::vector<std::vector<int>> AdjList;
     };
 
