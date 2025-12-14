@@ -151,27 +151,27 @@ PARLAY_NUM_THREADS=8 ./parallel_algos --mode bfs
 Data initialized
 
 Attempt 1:
-Parallel bfs: 2073ms
-Sequential bfs: 6440ms
+Parallel bfs: 2809ms
+Sequential bfs: 10037ms
 
 Attempt 2:
-Parallel bfs: 2095ms
-Sequential bfs: 6399ms
+Parallel bfs: 3206ms
+Sequential bfs: 9765ms
 
 Attempt 3:
-Parallel bfs: 2047ms
-Sequential bfs: 8392ms
+Parallel bfs: 2754ms
+Sequential bfs: 8656ms
 
 Attempt 4:
-Parallel bfs: 2081ms
-Sequential bfs: 6346ms
+Parallel bfs: 2768ms
+Sequential bfs: 8593ms
 
 Attempt 5:
-Parallel bfs: 2060ms
-Sequential bfs: 6389ms
+Parallel bfs: 2816ms
+Sequential bfs: 8558ms
 
-Parallel bfs average: 2071.2000ms
-Sequential bfs average: 6793.2000ms
+Parallel bfs average: 2870.6000ms
+Sequential bfs average: 9121.8000ms
 ```
 
 ## Запуск тестов (BFS)
