@@ -72,6 +72,65 @@ TEST(BfsTest, PathGraphTest) {
     }
 }
 
+TEST(BfsTest, DirectedCycleGraphTest) {
+    int n = 1e5;
+    NAlgoLab::NUtils::TGraph graph(n);
+    for (int i = 0; i < n; i++) {
+        auto next = (i + 1) % n;
+        graph.add_edge(i, next);
+    }
+
+    auto run_and_check = [&](int start_v) {
+        auto seq_result = NAlgoLab::NBfs::seq_bfs(start_v, graph);
+        auto par_result = NAlgoLab::NBfs::parallel_bfs(start_v, graph, 0, n / 1000);
+
+        for (int v = 0; v < n; v++) {
+            auto expected_dist = (v - start_v + n) % n;
+
+            EXPECT_EQ(seq_result[v], expected_dist) << "Вершина v: " << v << ", стартовая вершина: " << start_v << ", упало на последовательной";
+            ASSERT_EQ(par_result[v], expected_dist) << "Вершина v: " << v << ", стартовая вершина: " << start_v << ", упало на параллельной";
+        }
+    };
+
+    run_and_check(0);
+    run_and_check(n - 1);
+
+    std::mt19937 gen(std::random_device{}());
+    for (auto _ = 0; _ < 10; _++) {
+        run_and_check(gen() % n);
+    }
+}
+
+TEST(BfsTest, UndirectedCycleGraphTest) {
+    int n = 1e5;
+    NAlgoLab::NUtils::TGraph graph(n);
+    for (int i = 0; i < n; i++) {
+        auto next = (i + 1) % n;
+        graph.add_edge(i, next);
+        graph.add_edge(next, i);
+    }
+
+    auto run_and_check = [&](int start_v) {
+        auto seq_result = NAlgoLab::NBfs::seq_bfs(start_v, graph);
+        auto par_result = NAlgoLab::NBfs::parallel_bfs(start_v, graph, 0, n / 1000);
+
+        for (int v = 0; v < n; v++) {
+            auto expected_dist = std::min((v - start_v + n) % n, (start_v - v + n) % n);
+
+            EXPECT_EQ(seq_result[v], expected_dist) << "Вершина v: " << v << ", стартовая вершина: " << start_v << ", упало на последовательной";
+            ASSERT_EQ(par_result[v], expected_dist) << "Вершина v: " << v << ", стартовая вершина: " << start_v << ", упало на параллельной";
+        }
+    };
+
+    run_and_check(0);
+    run_and_check(n - 1);
+
+    std::mt19937 gen(std::random_device{}());
+    for (auto _ = 0; _ < 10; _++) {
+        run_and_check(gen() % n);
+    }
+}
+
 TEST(BfsTest, CompleteGraphTest) {
     int n = 1000;
     NAlgoLab::NUtils::TGraph graph(n);

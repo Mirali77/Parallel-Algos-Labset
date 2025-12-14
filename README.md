@@ -179,15 +179,19 @@ Sequential bfs average: 9121.8000ms
 ```bash
 (base) mirali777@109893531i:~/parallel_algos/build$ ./bfs_tests
 Running main() from /home/mirali777/parallel_algos/build/_deps/googletest-src/googletest/src/gtest_main.cc
-[==========] Running 8 tests from 1 test suite.
+[==========] Running 10 tests from 1 test suite.
 [----------] Global test environment set-up.
-[----------] 8 tests from BfsTest
+[----------] 10 tests from BfsTest
 [ RUN      ] BfsTest.CubeGraphTest
-[       OK ] BfsTest.CubeGraphTest (5867 ms)
+[       OK ] BfsTest.CubeGraphTest (5834 ms)
 [ RUN      ] BfsTest.PathGraphTest
-[       OK ] BfsTest.PathGraphTest (1607 ms)
+[       OK ] BfsTest.PathGraphTest (1530 ms)
+[ RUN      ] BfsTest.DirectedCycleGraphTest
+[       OK ] BfsTest.DirectedCycleGraphTest (1768 ms)
+[ RUN      ] BfsTest.UndirectedCycleGraphTest
+[       OK ] BfsTest.UndirectedCycleGraphTest (1223 ms)
 [ RUN      ] BfsTest.CompleteGraphTest
-[       OK ] BfsTest.CompleteGraphTest (1409 ms)
+[       OK ] BfsTest.CompleteGraphTest (1413 ms)
 [ RUN      ] BfsTest.BinaryTreeGraphTest
 [       OK ] BfsTest.BinaryTreeGraphTest (804 ms)
 [ RUN      ] BfsTest.MultipleEdgesAndSelfLoopsGraphTest
@@ -197,10 +201,10 @@ Running main() from /home/mirali777/parallel_algos/build/_deps/googletest-src/go
 [ RUN      ] BfsTest.RandomSparseGraphTestParallelOnly
 [       OK ] BfsTest.RandomSparseGraphTestParallelOnly (8 ms)
 [ RUN      ] BfsTest.RandomDenseGraphTestParallelOnly
-[       OK ] BfsTest.RandomDenseGraphTestParallelOnly (168 ms)
-[----------] 8 tests from BfsTest (9867 ms total)
+[       OK ] BfsTest.RandomDenseGraphTestParallelOnly (173 ms)
+[----------] 10 tests from BfsTest (12758 ms total)
 
 [----------] Global test environment tear-down
-[==========] 8 tests from 1 test suite ran. (9867 ms total)
-[  PASSED  ] 8 tests.
+[==========] 10 tests from 1 test suite ran. (12758 ms total)
+[  PASSED  ] 10 tests.
 ```
