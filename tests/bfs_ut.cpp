@@ -72,3 +72,77 @@ TEST(BfsTest, PathGraph) {
     }
 }
 
+TEST(BfsTest, CompleteGraph) {
+    int n = 1000;
+    NAlgoLab::NUtils::TGraph graph(n);
+    for(int v1 = 0; v1 < n; v1++) for(int v2 = v1 + 1; v2 < n; v2++) {
+        graph.add_edge(v1, v2);
+        graph.add_edge(v2, v1);
+    }
+
+    auto run_and_check = [&](int start_v) {
+        auto seq_result = NAlgoLab::NBfs::seq_bfs(start_v, graph);
+        auto par_result = NAlgoLab::NBfs::parallel_bfs(start_v, graph, 0, n / 1000);
+
+        for (int v = 0; v < n; v++) {
+            ASSERT_EQ(seq_result[v], v == start_v ? 0 : 1) << "Вершина v: " << v << ", стартовая вершина: " << start_v << ", упало на последовательной";
+            ASSERT_EQ(par_result[v], v == start_v ? 0 : 1) << "Вершина v: " << v << ", стартовая вершина: " << start_v << ", упало на параллельной";
+        }
+    };
+
+    std::mt19937 gen(std::random_device{}());
+    for (auto _ = 0; _ < 50; _++) {
+        run_and_check(gen() % n);
+    }
+}
+
+TEST(BfsTest, BinaryTreeGraph) {
+    int n = 1e4;
+    NAlgoLab::NUtils::TGraph graph(n);
+
+    for (int i = 1; i < n; ++i) {
+        int parent = (i - 1) >> 1;
+        graph.add_edge(parent, i);
+        graph.add_edge(i, parent);
+    }
+
+    auto dist = [&](int a, int b) {
+        std::map<int, int> a_anc_dist;
+        {
+            int dist = 0;
+            while (true) {
+                a_anc_dist[a] = dist++;
+                if (a > 0) a = (a - 1) >> 1;
+                else break;
+            }
+        }
+        auto it = a_anc_dist.find(b);
+        int dist = 0;
+        while (it == a_anc_dist.end()) {
+            b = (b - 1) >> 1;
+            it = a_anc_dist.find(b);
+            dist++;
+        }
+        return dist + it->second;
+    };
+
+    auto run_and_check = [&](int start_v) {
+        auto seq_result = NAlgoLab::NBfs::seq_bfs(start_v, graph);
+        auto par_result = NAlgoLab::NBfs::parallel_bfs(start_v, graph, 0, n / 1000);
+
+        for (int v = 0; v < n; ++v) {
+            ASSERT_EQ(seq_result[v], dist(v, start_v))
+                << "Вершина v: " << v << ", стартовая вершина: " << start_v << ", упало на последовательной";
+            ASSERT_EQ(par_result[v], dist(v, start_v))
+                << "Вершина v: " << v << ", стартовая вершина: " << start_v << ", упало на параллельной";
+        }
+    };
+
+    run_and_check(0);
+    run_and_check(n-1);
+
+    std::mt19937 gen(std::random_device{}());
+    for (auto _ = 0; _ < 10; _++) {
+        run_and_check(gen() % n);
+    }
+}
