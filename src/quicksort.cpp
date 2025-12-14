@@ -1,13 +1,12 @@
 #include "quicksort.h"
 #include "utils.h"
-
 #include <iostream>
 #include <chrono>
 #include <algorithm>
 
 namespace NAlgoLab::NQuickSort {
     void quicksort_benchmark(size_t n, size_t attempts_count, size_t batch_treshhold) {
-        parlay::sequence<int> data = NAlgoLab::NUtils::GenerateRandomParlaySeq(n);
+        parlay::sequence<int> data = NAlgoLab::NUtils::generate_random_parlay_seq(n);
         std::cout << "Data initialized" << std::endl << std::endl;
 
         double par_ms_avg = 0;

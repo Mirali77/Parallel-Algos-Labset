@@ -1,6 +1,6 @@
-# Реализация параллельного и последовательного QuickSort-ов
+# Реализация параллельного и последовательного QuickSort/BFS
 
-## Что сделано
+## Что сделано (QuickSort)
 
 - Реализованы две версии QuickSort:
   - **Последовательная (seq)**
@@ -11,57 +11,70 @@
 
 ---
 
-## Как собрать и запустить
-
-Требования:
-- ParlayLib (https://github.com/cmu-parlay/parlaylib)
-- CMake >= 3.10
-- C++20
+## Как собрать
 
 ```sh
 # Сборка
 mkdir build && cd build
 cmake ..
 make
+```
 
+## Как запустить (QuickSort)
+
+```sh
 # Запуск программы (пример для 8 потоков)
-PARLAY_NUM_THREADS=8 ./parallel_algos
+PARLAY_NUM_THREADS=8 ./parallel_algos --mode quicksort
 
 # Запуск тестов (они находятся в tests)
 ./parallel_algos_tests
 ```
 
-## Бенчмарки
+### Дополнительные аргументы запуска (QuickSort)
+
+- **Размер массива:**  
+  `--n <N>`  
+  _Дефолт:_ `1e8`
+
+- **Количество попыток для усреднения:**  
+  `--attempts <число>`  
+  _Дефолт:_ `5`
+
+- **Размер батча, на котором вместо параллельной запускается последовательная версия:**  
+  `--batch-size <размер>`  
+  _Дефолт:_ `2^18` (`262144`)
+
+## Бенчмарки (QuickSort)
 
 ```bash
-(base) mirali777@109893531i:~/parallel_algos/build$ PARLAY_NUM_THREADS=4 ./parallel_algos
+(base) mirali777@109893531i:~/parallel_algos/build$ PARLAY_NUM_THREADS=4 ./parallel_algos --mode quicksort
 Data initialized
 
 Attempt 1:
-Parallel quicksort: 14623ms
-Sequential sort: 42390ms
+Parallel quicksort: 10436ms
+Sequential sort: 30712ms
 
 Attempt 2:
-Parallel quicksort: 14530ms
-Sequential sort: 40353ms
+Parallel quicksort: 11050ms
+Sequential sort: 30981ms
 
 Attempt 3:
-Parallel quicksort: 13858ms
-Sequential sort: 40052ms
+Parallel quicksort: 10747ms
+Sequential sort: 30203ms
 
 Attempt 4:
-Parallel quicksort: 13773ms
-Sequential sort: 40468ms
+Parallel quicksort: 10568ms
+Sequential sort: 30102ms
 
 Attempt 5:
-Parallel quicksort: 13769ms
-Sequential sort: 40666ms
+Parallel quicksort: 10466ms
+Sequential sort: 31200ms
 
-Parallel quicksort average: 14110.6000ms
-Sequential sort average: 40785.8000ms
+Parallel quicksort average: 10653.4000ms
+Sequential sort average: 30639.6000ms
 ```
 
-## Запуск тестов
+## Запуск тестов (QuickSort)
 
 ```bash
 (base) mirali777@109893531i:~/parallel_algos/build$ ./parallel_algos_tests 
@@ -91,3 +104,74 @@ Running main() from /home/mirali777/parallel_algos/build/_deps/googletest-src/go
 [==========] 8 tests from 1 test suite ran. (2629 ms total)
 [  PASSED  ] 8 tests.
 ```
+
+## Что сделано (BFS)
+
+- Реализованы две версии BFS:
+  - **Последовательная (seq)**
+  - **Параллельная (par), используя ParlayLib**
+- Кубический граф со стороной длины 100, тестирование BFS, усреднение таймингов по 5 попыткам
+- Параллельная версия запускалась c `PARLAY_NUM_THREADS=4` (с 4 тредами)
+- Сравнение: ускорение par/seq, тесты на корректность (с помощью GTest).
+
+---
+
+## Как запустить (BFS)
+
+```sh
+# Запуск программы (пример для 8 потоков)
+PARLAY_NUM_THREADS=8 ./parallel_algos --mode bfs
+
+# Запуск тестов (они находятся в tests)
+./parallel_algos_tests
+```
+
+### Дополнительные аргументы запуска (BFS)
+
+- **Длина кубического графа:**  
+  `--n <N>`  
+  _Дефолт:_ `300`
+
+- **Количество попыток для усреднения:**  
+  `--attempts <число>`  
+  _Дефолт:_ `5`
+
+- **Размер слоя, на котором вместо параллельной запускается последовательная часть:**  
+  `--batch-size <размер>`  
+  _Дефолт:_ `2000`
+
+- **Размер блоков, которые будут обрабатываться тредами:**  
+  `--block-size <число>`  
+  _Дефолт:_ `200`
+
+## Бенчмарки (BFS)
+
+```bash
+(base) mirali777@109893531i:~/parallel_algos/build$ PARLAY_NUM_THREADS=4 ./parallel_algos --mode bfs
+Data initialized
+
+Attempt 1:
+Parallel bfs: 2073ms
+Sequential bfs: 6440ms
+
+Attempt 2:
+Parallel bfs: 2095ms
+Sequential bfs: 6399ms
+
+Attempt 3:
+Parallel bfs: 2047ms
+Sequential bfs: 8392ms
+
+Attempt 4:
+Parallel bfs: 2081ms
+Sequential bfs: 6346ms
+
+Attempt 5:
+Parallel bfs: 2060ms
+Sequential bfs: 6389ms
+
+Parallel bfs average: 2071.2000ms
+Sequential bfs average: 6793.2000ms
+```
+
+## Запуск тестов (BFS)

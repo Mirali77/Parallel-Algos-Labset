@@ -5,7 +5,7 @@
 
 TEST(QuickSortTest, ParallelQuickSortNoBatchingRandomDataTest) {
     size_t N = 1e6;
-    auto data = NAlgoLab::NUtils::GenerateRandomParlaySeq(N);
+    auto data = NAlgoLab::NUtils::generate_random_parlay_seq(N);
     NAlgoLab::NQuickSort::parallel_quicksort(data, /* batch_threshold */ 1);
     for (int i = 1; i < N; i++) {
         ASSERT_TRUE(data[i - 1] <= data[i])
@@ -20,7 +20,7 @@ TEST(QuickSortTest, ParallelQuickSortNoBatchingRandomDataTest) {
 
 TEST(QuickSortTest, ParallelQuickSortWithBatchingRandomDataTest) {
     size_t N = 1e6;
-    auto data = NAlgoLab::NUtils::GenerateRandomParlaySeq(N);
+    auto data = NAlgoLab::NUtils::generate_random_parlay_seq(N);
     NAlgoLab::NQuickSort::parallel_quicksort(data, /* batch_threshold */ 1e3);
     for (int i = 1; i < N; i++) {
         ASSERT_TRUE(data[i - 1] <= data[i])
@@ -35,7 +35,7 @@ TEST(QuickSortTest, ParallelQuickSortWithBatchingRandomDataTest) {
 
 TEST(QuickSortTest, SequentialQuickSortRandomDataTest) {
     size_t N = 1e6;
-    auto data = NAlgoLab::NUtils::GenerateRandomParlaySeq(N);
+    auto data = NAlgoLab::NUtils::generate_random_parlay_seq(N);
     NAlgoLab::NQuickSort::seq_quicksort(data);
     for (int i = 1; i < N; i++) {
         ASSERT_TRUE(data[i - 1] <= data[i])
@@ -52,7 +52,7 @@ TEST(QuickSortTest, ParallelQuickSortLowVarietyRandomDataTest) {
     size_t N = 1e6;
     // Значения лежат на отрезке [0, 7]
     // Особенность: много равных элементов
-    auto data = NAlgoLab::NUtils::GenerateRandomParlaySeq(N, /* values lowerbound */ 0, /* values upperbound */ 7);
+    auto data = NAlgoLab::NUtils::generate_random_parlay_seq(N, /* values lowerbound */ 0, /* values upperbound */ 7);
 
     auto timer_start = std::chrono::high_resolution_clock::now();
     NAlgoLab::NQuickSort::parallel_quicksort(data, /* batch_threshold */ 1e3);
@@ -85,7 +85,7 @@ TEST(QuickSortTest, ParallelQuickSortLowVarietyRandomDataTest) {
 TEST(QuickSortTest, ParallelQuickSortAllEqualDataTest) {
     size_t N = 1e6;
     // Массив из семёрок
-    auto data = NAlgoLab::NUtils::GenerateRandomParlaySeq(N, 7, 7);
+    auto data = NAlgoLab::NUtils::generate_random_parlay_seq(N, 7, 7);
 
     NAlgoLab::NQuickSort::parallel_quicksort(data, /* batch_threshold */ 1e3);
 
@@ -103,7 +103,7 @@ TEST(QuickSortTest, ParallelQuickSortAllEqualDataTest) {
 TEST(QuickSortTest, ParallelQuickSortSortedDataTest) {
     size_t N = 1e6;
     // Массив уже изначально отсортирован
-    auto data = NAlgoLab::NUtils::GenerateRandomParlaySeq(N);
+    auto data = NAlgoLab::NUtils::generate_random_parlay_seq(N);
     std::sort(data.begin(), data.end());
 
     auto timer_start = std::chrono::high_resolution_clock::now();
@@ -117,7 +117,7 @@ TEST(QuickSortTest, ParallelQuickSortSortedDataTest) {
 TEST(QuickSortTest, ParallelQuickSortReversedSortedDataTest) {
     size_t N = 1e6;
     // Массив изначально отсортирован в обратном порядке
-    auto data = NAlgoLab::NUtils::GenerateRandomParlaySeq(N);
+    auto data = NAlgoLab::NUtils::generate_random_parlay_seq(N);
     std::sort(data.rbegin(), data.rend());
     ASSERT_TRUE(data[0] > data[N - 1]);
 
