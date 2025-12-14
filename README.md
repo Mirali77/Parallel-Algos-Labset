@@ -23,8 +23,8 @@ make
 ## Как запустить (QuickSort)
 
 ```sh
-# Запуск программы (пример для 8 потоков)
-PARLAY_NUM_THREADS=8 ./parallel_algos --mode quicksort
+# Запуск программы (пример для 4 потоков)
+PARLAY_NUM_THREADS=4 ./parallel_algos --mode quicksort
 
 # Запуск тестов
 ./quicksort_tests
@@ -119,8 +119,8 @@ Running main() from /home/mirali777/parallel_algos/build/_deps/googletest-src/go
 ## Как запустить (BFS)
 
 ```sh
-# Запуск программы (пример для 8 потоков)
-PARLAY_NUM_THREADS=8 ./parallel_algos --mode bfs
+# Запуск программы (пример для 4 потоков)
+PARLAY_NUM_THREADS=4 ./parallel_algos --mode bfs
 
 # Запуск тестов
 ./bfs_tests
