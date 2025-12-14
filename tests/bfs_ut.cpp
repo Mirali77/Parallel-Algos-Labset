@@ -3,7 +3,7 @@
 #include "../src/bfs.h"
 #include "../src/utils.h"
 
-TEST(BfsTest, CubeGraph) {
+TEST(BfsTest, CubeGraphTest) {
     int n = 100;
     int N = n * n * n;
     auto graph = NAlgoLab::NUtils::generate_cube_graph(n);
@@ -18,7 +18,7 @@ TEST(BfsTest, CubeGraph) {
             auto [x, y, z] = NAlgoLab::NUtils::get_coord(v, n);
             auto dist = abs(x - start_x) + abs(y - start_y) + abs(z - start_z);
 
-            ASSERT_EQ(seq_result[v], dist)
+            EXPECT_EQ(seq_result[v], dist)
                 << "Вершина v: "
                 << x << " " << y << " " << z
                 << " , стартовая вершина: "
@@ -45,7 +45,7 @@ TEST(BfsTest, CubeGraph) {
     }
 }
 
-TEST(BfsTest, PathGraph) {
+TEST(BfsTest, PathGraphTest) {
     int n = 1e5;
     NAlgoLab::NUtils::TGraph graph(n);
     for (int i = 0; i < n - 1; i++) {
@@ -58,7 +58,7 @@ TEST(BfsTest, PathGraph) {
         auto par_result = NAlgoLab::NBfs::parallel_bfs(start_v, graph, 0, n / 1000);
 
         for (int v = 0; v < n; v++) {
-            ASSERT_EQ(seq_result[v], abs(v - start_v)) << "Вершина v: " << v << ", стартовая вершина: " << start_v << ", упало на последовательной";
+            EXPECT_EQ(seq_result[v], abs(v - start_v)) << "Вершина v: " << v << ", стартовая вершина: " << start_v << ", упало на последовательной";
             ASSERT_EQ(par_result[v], abs(v - start_v)) << "Вершина v: " << v << ", стартовая вершина: " << start_v << ", упало на параллельной";
         }
     };
@@ -72,7 +72,7 @@ TEST(BfsTest, PathGraph) {
     }
 }
 
-TEST(BfsTest, CompleteGraph) {
+TEST(BfsTest, CompleteGraphTest) {
     int n = 1000;
     NAlgoLab::NUtils::TGraph graph(n);
     for(int v1 = 0; v1 < n; v1++) for(int v2 = v1 + 1; v2 < n; v2++) {
@@ -85,7 +85,7 @@ TEST(BfsTest, CompleteGraph) {
         auto par_result = NAlgoLab::NBfs::parallel_bfs(start_v, graph, 0, n / 1000);
 
         for (int v = 0; v < n; v++) {
-            ASSERT_EQ(seq_result[v], v == start_v ? 0 : 1) << "Вершина v: " << v << ", стартовая вершина: " << start_v << ", упало на последовательной";
+            EXPECT_EQ(seq_result[v], v == start_v ? 0 : 1) << "Вершина v: " << v << ", стартовая вершина: " << start_v << ", упало на последовательной";
             ASSERT_EQ(par_result[v], v == start_v ? 0 : 1) << "Вершина v: " << v << ", стартовая вершина: " << start_v << ", упало на параллельной";
         }
     };
@@ -96,7 +96,7 @@ TEST(BfsTest, CompleteGraph) {
     }
 }
 
-TEST(BfsTest, BinaryTreeGraph) {
+TEST(BfsTest, BinaryTreeGraphTest) {
     int n = 1e4;
     NAlgoLab::NUtils::TGraph graph(n);
 
@@ -131,7 +131,7 @@ TEST(BfsTest, BinaryTreeGraph) {
         auto par_result = NAlgoLab::NBfs::parallel_bfs(start_v, graph, 0, n / 1000);
 
         for (int v = 0; v < n; ++v) {
-            ASSERT_EQ(seq_result[v], dist(v, start_v))
+            EXPECT_EQ(seq_result[v], dist(v, start_v))
                 << "Вершина v: " << v << ", стартовая вершина: " << start_v << ", упало на последовательной";
             ASSERT_EQ(par_result[v], dist(v, start_v))
                 << "Вершина v: " << v << ", стартовая вершина: " << start_v << ", упало на параллельной";
@@ -144,5 +144,89 @@ TEST(BfsTest, BinaryTreeGraph) {
     std::mt19937 gen(std::random_device{}());
     for (auto _ = 0; _ < 10; _++) {
         run_and_check(gen() % n);
+    }
+}
+
+TEST(BfsTest, MultipleEdgesAndSelfLoopsGraphTest) {
+    auto n = 5;
+    NAlgoLab::NUtils::TGraph graph(n);
+    for (auto [from, to] : std::vector<std::pair<int, int>>{
+        {0, 0},
+        {0, 1},
+        {0, 1},
+        {1, 1},
+        {1, 3},
+        {1, 2},
+        {2, 3},
+        {3, 4},
+        {4, 4},
+        {2, 1}
+    }) {
+        graph.add_edge(from, to);
+    }
+    auto start_v = 0;
+    // 0-0: 0 = 0
+    // 0-1: 0 -> 1 = 1
+    // 0-2: 0 -> 1 -> 2 = 2
+    // 0-3: 0 -> 1 -> 3 = 2
+    // 0-4: 0 -> 1 -> 3 -> 4 = 3
+    parlay::sequence<int> expected_distances{0, 1, 2, 2, 3};
+
+    EXPECT_EQ(NAlgoLab::NBfs::seq_bfs(start_v, graph), expected_distances)
+        << "Упала последовательная версия";
+    ASSERT_EQ(NAlgoLab::NBfs::parallel_bfs(start_v, graph, 0, 1), expected_distances)
+        << "Упала параллельная версия";
+}
+
+TEST(BfsTest, NoEdgesGraphTest) {
+    auto n = 100;
+    NAlgoLab::NUtils::TGraph graph(n);
+
+    for (auto start_v = 0; start_v < n; start_v++) {
+        parlay::sequence<int> expected_distances(n, -1);
+        expected_distances[start_v] = 0;
+
+        EXPECT_EQ(NAlgoLab::NBfs::seq_bfs(start_v, graph), expected_distances)
+            << "Упала последовательная версия на стартовой вершине " << start_v;
+        ASSERT_EQ(NAlgoLab::NBfs::parallel_bfs(start_v, graph, 0, 10), expected_distances)
+            << "Упала параллельная версия на стартовой вершине " << start_v;
+    }
+}
+
+TEST(BfsTest, RandomSparseGraphTestParallelOnly) {
+    // Здесь мы доверяем последовательному BFS
+    auto n = 100;
+    auto m = 3 * n;
+    NAlgoLab::NUtils::TGraph graph(n);
+
+    std::mt19937 gen(std::random_device{}());
+    for (auto _ = 0; _ < m; _++) {
+        graph.add_edge(gen() % n, gen() % n);
+    }
+
+    for (auto start_v = 0; start_v < n; start_v++) {
+        auto expected_distances = NAlgoLab::NBfs::seq_bfs(start_v, graph);
+
+        ASSERT_EQ(NAlgoLab::NBfs::parallel_bfs(start_v, graph, 0, 10), expected_distances)
+            << "Упала параллельная версия на стартовой вершине " << start_v;
+    }
+}
+
+TEST(BfsTest, RandomDenseGraphTestParallelOnly) {
+    // Здесь мы доверяем последовательному BFS
+    auto n = 100;
+    auto m = 3 * n * n;
+    NAlgoLab::NUtils::TGraph graph(n);
+
+    std::mt19937 gen(std::random_device{}());
+    for (auto _ = 0; _ < m; _++) {
+        graph.add_edge(gen() % n, gen() % n);
+    }
+
+    for (auto start_v = 0; start_v < n; start_v++) {
+        auto expected_distances = NAlgoLab::NBfs::seq_bfs(start_v, graph);
+
+        ASSERT_EQ(NAlgoLab::NBfs::parallel_bfs(start_v, graph, 0, 10), expected_distances)
+            << "Упала параллельная версия на стартовой вершине " << start_v;
     }
 }
